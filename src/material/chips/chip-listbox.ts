@@ -206,7 +206,8 @@ export class MatChipListbox
     // indirect descendants if it's left as false.
     descendants: true,
   })
-  override _chips: QueryList<MatChipOption>;
+  // We need an initializer here to avoid a TS error. The value will be set in `ngAfterViewInit`.
+  override _chips: QueryList<MatChipOption> = undefined!;
 
   ngAfterContentInit() {
     if (this._pendingInitialValue !== undefined) {
@@ -310,7 +311,6 @@ export class MatChipListbox
       // Wait to see if focus moves to an individual chip.
       setTimeout(() => {
         if (!this.focused) {
-          this._propagateChanges();
           this._markAsTouched();
         }
       });

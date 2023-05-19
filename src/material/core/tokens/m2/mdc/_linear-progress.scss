@@ -14,9 +14,13 @@ $prefix: (mdc, linear-progress);
 // `null` indicates that we are intentionally choosing not to emit a slot or value for the token in
 // our CSS.
 @function get-unthemable-tokens() {
+  $height: 4px;
+
   @return (
-    // The height of the progress bar track.
-    track-height: 4px
+    // The height of the progress bar. `active-indicator-height` applies to the
+    // bar and `track-height` applies to the track.
+    active-indicator-height: $height,
+    track-height: $height,
   );
 }
 
