@@ -198,18 +198,11 @@ __metadata:
 
 "@angular/cdk@file:../../dist/releases/cdk::locator=yarn-pnp-compat%40workspace%3A.":
   version: 16.1.0-next.0+sha-02e3aab
-  resolution: "@angular/cdk@file:../../dist/releases/cdk#../../dist/releases/cdk::hash=01b1ed&locator=yarn-pnp-compat%40workspace%3A."
+  resolution: "@angular/cdk@file:../../dist/releases/cdk#../../dist/releases/cdk::hash=dd3363&locator=yarn-pnp-compat%40workspace%3A."
   dependencies:
     parse5: ^7.1.2
     tslib: ^2.3.0
-  peerDependencies:
-    "@angular/common": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/core": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    rxjs: ^6.5.3 || ^7.4.0
-  dependenciesMeta:
-    parse5:
-      optional: true
-  checksum: 20e81c9a11b9a73901923412af860d0a40416ca490d7987a5753141f8a716b092f40cd47c4941dfa09acdb15738f82d0d72303491b3a182a4ea641a3c695b166
+  checksum: 78ff0d41df0c326750050b821187cfaef869c06739253444539a137ae8214c8577ee2b3e47f8e7aebc69261ada2fc414967f9f2aa999ac22ec1cb0c3cc85735e
   languageName: node
   linkType: hard
 
@@ -382,7 +375,7 @@ __metadata:
 
 "@angular/material@file:../../dist/releases/material::locator=yarn-pnp-compat%40workspace%3A.":
   version: 16.1.0-next.0+sha-02e3aab
-  resolution: "@angular/material@file:../../dist/releases/material#../../dist/releases/material::hash=fd457a&locator=yarn-pnp-compat%40workspace%3A."
+  resolution: "@angular/material@file:../../dist/releases/material#../../dist/releases/material::hash=c0c856&locator=yarn-pnp-compat%40workspace%3A."
   dependencies:
     "@material/animation": 15.0.0-canary.684e33d25.0
     "@material/auto-init": 15.0.0-canary.684e33d25.0
@@ -432,15 +425,7 @@ __metadata:
     "@material/touch-target": 15.0.0-canary.684e33d25.0
     "@material/typography": 15.0.0-canary.684e33d25.0
     tslib: ^2.3.0
-  peerDependencies:
-    "@angular/animations": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/cdk": 16.1.0-next.0+sha-02e3aab
-    "@angular/common": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/core": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/forms": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/platform-browser": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    rxjs: ^6.5.3 || ^7.4.0
-  checksum: 686fa26ad22ddf3589756679e7867ae81c7a40fd58f389a78db1c61218f60493e3f13ea634cea76cee56b58ea43779763fa3d18f865d413ff7d5c3a1881e9d25
+  checksum: 94f5252c3a4772a03eb7cfd95e9b1e5671cd9b479e67a5067de642e47895126f3163d3beb4c9af85d7bb0c6e9d411786c17da1630b455a87ee1e408709e35b2f
   languageName: node
   linkType: hard
 
@@ -8967,12 +8952,12 @@ __metadata:
   linkType: hard
 
 "socket.io-parser@npm:~4.2.0":
-  version: 4.2.1
-  resolution: "socket.io-parser@npm:4.2.1"
+  version: 4.2.3
+  resolution: "socket.io-parser@npm:4.2.3"
   dependencies:
     "@socket.io/component-emitter": ~3.1.0
     debug: ~4.3.1
-  checksum: 2582202f22538d7e6b4436991378cb4cea3b2f8219cda24923ae35afd291ab5ad6120e7d093e41738256b6c6ad10c667dd25753c2d9a2340fead04e9286f152d
+  checksum: f14030d09ccb82fa32ee68abe7ba586b8b991b16584194eb3c9e5dba8e80829f39c3b39b53ba4efb6a73e16beeaef8478020650a0c1352e0b833aa1da9af4682
   languageName: node
   linkType: hard
 
