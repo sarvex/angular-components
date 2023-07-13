@@ -198,18 +198,11 @@ __metadata:
 
 "@angular/cdk@file:../../dist/releases/cdk::locator=yarn-pnp-compat%40workspace%3A.":
   version: 16.1.0-next.0+sha-02e3aab
-  resolution: "@angular/cdk@file:../../dist/releases/cdk#../../dist/releases/cdk::hash=01b1ed&locator=yarn-pnp-compat%40workspace%3A."
+  resolution: "@angular/cdk@file:../../dist/releases/cdk#../../dist/releases/cdk::hash=dd3363&locator=yarn-pnp-compat%40workspace%3A."
   dependencies:
     parse5: ^7.1.2
     tslib: ^2.3.0
-  peerDependencies:
-    "@angular/common": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/core": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    rxjs: ^6.5.3 || ^7.4.0
-  dependenciesMeta:
-    parse5:
-      optional: true
-  checksum: 20e81c9a11b9a73901923412af860d0a40416ca490d7987a5753141f8a716b092f40cd47c4941dfa09acdb15738f82d0d72303491b3a182a4ea641a3c695b166
+  checksum: 78ff0d41df0c326750050b821187cfaef869c06739253444539a137ae8214c8577ee2b3e47f8e7aebc69261ada2fc414967f9f2aa999ac22ec1cb0c3cc85735e
   languageName: node
   linkType: hard
 
@@ -382,7 +375,7 @@ __metadata:
 
 "@angular/material@file:../../dist/releases/material::locator=yarn-pnp-compat%40workspace%3A.":
   version: 16.1.0-next.0+sha-02e3aab
-  resolution: "@angular/material@file:../../dist/releases/material#../../dist/releases/material::hash=fd457a&locator=yarn-pnp-compat%40workspace%3A."
+  resolution: "@angular/material@file:../../dist/releases/material#../../dist/releases/material::hash=c0c856&locator=yarn-pnp-compat%40workspace%3A."
   dependencies:
     "@material/animation": 15.0.0-canary.684e33d25.0
     "@material/auto-init": 15.0.0-canary.684e33d25.0
@@ -432,15 +425,7 @@ __metadata:
     "@material/touch-target": 15.0.0-canary.684e33d25.0
     "@material/typography": 15.0.0-canary.684e33d25.0
     tslib: ^2.3.0
-  peerDependencies:
-    "@angular/animations": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/cdk": 16.1.0-next.0+sha-02e3aab
-    "@angular/common": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/core": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/forms": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/platform-browser": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    rxjs: ^6.5.3 || ^7.4.0
-  checksum: 686fa26ad22ddf3589756679e7867ae81c7a40fd58f389a78db1c61218f60493e3f13ea634cea76cee56b58ea43779763fa3d18f865d413ff7d5c3a1881e9d25
+  checksum: 94f5252c3a4772a03eb7cfd95e9b1e5671cd9b479e67a5067de642e47895126f3163d3beb4c9af85d7bb0c6e9d411786c17da1630b455a87ee1e408709e35b2f
   languageName: node
   linkType: hard
 
@@ -8748,7 +8733,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.4.0":
+"semver@npm:7.4.0, semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.5, semver@npm:^7.3.8":
   version: 7.4.0
   resolution: "semver@npm:7.4.0"
   dependencies:
@@ -8760,11 +8745,11 @@ __metadata:
   linkType: hard
 
 "semver@npm:^5.6.0":
-  version: 5.7.1
-  resolution: "semver@npm:5.7.1"
+  version: 5.7.2
+  resolution: "semver@npm:5.7.2"
   bin:
-    semver: ./bin/semver
-  checksum: 57fd0acfd0bac382ee87cd52cd0aaa5af086a7dc8d60379dfe65fea491fb2489b6016400813930ecd61fd0952dae75c115287a1b16c234b1550887117744dfaf
+    semver: bin/semver
+  checksum: fb4ab5e0dd1c22ce0c937ea390b4a822147a9c53dbd2a9a0132f12fe382902beef4fbf12cf51bb955248d8d15874ce8cd89532569756384f994309825f10b686
   languageName: node
   linkType: hard
 
@@ -8774,17 +8759,6 @@ __metadata:
   bin:
     semver: ./bin/semver.js
   checksum: 1b26ecf6db9e8292dd90df4e781d91875c0dcc1b1909e70f5d12959a23c7eebb8f01ea581c00783bbee72ceeaad9505797c381756326073850dc36ed284b21b9
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.5, semver@npm:^7.3.8":
-  version: 7.3.8
-  resolution: "semver@npm:7.3.8"
-  dependencies:
-    lru-cache: ^6.0.0
-  bin:
-    semver: bin/semver.js
-  checksum: ba9c7cbbf2b7884696523450a61fee1a09930d888b7a8d7579025ad93d459b2d1949ee5bbfeb188b2be5f4ac163544c5e98491ad6152df34154feebc2cc337c1
   languageName: node
   linkType: hard
 
