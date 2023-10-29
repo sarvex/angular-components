@@ -6,8 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {normalize, logging} from '@angular-devkit/core';
-import {ProjectDefinition} from '@angular-devkit/core/src/workspace';
+import {normalize, logging, workspaces} from '@angular-devkit/core';
 import {
   chain,
   noop,
@@ -18,11 +17,12 @@ import {
 } from '@angular-devkit/schematics';
 import {
   addBodyClass,
-  defaultTargetBuilders,
   getProjectFromWorkspace,
   getProjectStyleFile,
   getProjectTargetOptions,
   getProjectIndexFiles,
+  getProjectTestTargets,
+  getProjectBuildTargets,
 } from '@angular/cdk/schematics';
 import {InsertChange} from '@schematics/angular/utility/change';
 import {getWorkspace, updateWorkspace} from '@schematics/angular/utility/workspace';
@@ -133,10 +133,10 @@ function addThemeStyleToTarget(
     }
 
     const targetOptions = getProjectTargetOptions(project, targetName);
-    const styles = targetOptions.styles as (string | {input: string})[];
+    const styles = targetOptions['styles'] as (string | {input: string})[];
 
     if (!styles) {
-      targetOptions.styles = [assetPath];
+      targetOptions['styles'] = [assetPath];
     } else {
       const existingStyles = styles.map(s => (typeof s === 'string' ? s : s.input));
 
@@ -174,13 +174,13 @@ function addThemeStyleToTarget(
  * this function can either throw or just show a warning.
  */
 function validateDefaultTargetBuilder(
-  project: ProjectDefinition,
+  project: workspaces.ProjectDefinition,
   targetName: 'build' | 'test',
   logger: logging.LoggerApi,
 ) {
-  const defaultBuilder = defaultTargetBuilders[targetName];
-  const targetConfig = project.targets && project.targets.get(targetName);
-  const isDefaultBuilder = targetConfig && targetConfig['builder'] === defaultBuilder;
+  const targets =
+    targetName === 'test' ? getProjectTestTargets(project) : getProjectBuildTargets(project);
+  const isDefaultBuilder = targets.length > 0;
 
   // Because the build setup for the Angular CLI can be customized by developers, we can't know
   // where to put the theme file in the workspace configuration if custom builders are being

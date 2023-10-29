@@ -38,7 +38,7 @@ Users can move through the chips using the arrow keys and select/deselect them w
 
 Use `<mat-chip-grid>` and `<mat-chip-row>` for assisting users with text entry.
 
-Chips are always used inside a container. To create chips connected to an input field, start by creating a `<mat-chip-grid>` as the container. Add an `<input/>` element, and register it to the `<mat-chip-grid>` by passing the `matChipInputFor` Input. Always use an `<input/>` element with `<mat-chip-grid>`. Nest a `<mat-chip-row>` element inside the `<mat-chip-grid>` for each piece of data entered by the user. An example of of using chips for text input.
+Chips are always used inside a container. To create chips connected to an input field, start by creating a `<mat-chip-grid>` as the container. Add an `<input/>` element, and register it to the `<mat-chip-grid>` by passing the `matChipInputFor` Input. Always use an `<input/>` element with `<mat-chip-grid>`. Nest a `<mat-chip-row>` element inside the `<mat-chip-grid>` for each piece of data entered by the user. An example of using chips for text input.
 
 <!-- example(chips-input) -->
 
@@ -90,7 +90,7 @@ To create a remove button, nest a `<button>` element with `matChipRemove` attrib
 </mat-chip-option>
 ```
 
-See the [accessibility](#accessibility) section for how to create accessible icons.
+See the [accessibility](#accessibility) section for best practices on implementing the `removed` Output and creating accessible icons.
 
 ### Orientation
 
@@ -189,3 +189,7 @@ Always apply MatChipRemove to a `<button>` element, never a `<mat-icon>` element
 When using MatChipListbox, never nest other interactive controls inside of the `<mat-chip-option>` element. Nesting controls degrades the experience for assistive technology users.
 
 By default, `MatChipListbox` displays a checkmark to identify selected items. While you can hide the checkmark indicator for single-selection via `hideSingleSelectionIndicator`, this makes the component less accessible by making it harder or impossible for users to visually identify selected items.
+
+When using `MatChipRemove`, you should always communicate removals for assistive technology. One way to accomplish this is by sending a message with `LiveAnnouncer`. Otherwise, removing a chip may only be communicated visually.
+
+When a chip is editable, provide instructions to assistive technology how to edit the chip using a keyboard. One way to accomplish this is adding an `aria-description` attribute with instructions to press enter to edit the chip.

@@ -5597,7 +5597,7 @@ StackBlitz instead of Plunker.
   behaviors are stable and mature enough to exit beta. Please continue to file issues that
   help us eliminate more bugs from the forthcoming 5.0.0 release. Moving forward, the _major_
   version number of Angular Material and CDK will update alongside Angular itself.
-* A [moment.js](http://momentjs.com/) implementation of the `DateAdapter` for `MatDatepicker` is
+* A [moment.js](https://momentjs.com/) implementation of the `DateAdapter` for `MatDatepicker` is
   now available as `@angular/material-moment-adapter`
 * Based on Angular 5.0
 * More consistent naming conventions across the board
@@ -5774,7 +5774,7 @@ StackBlitz instead of Plunker.
 
 * Progress spinner is now entirely css-based.
 * Fixed sidenav: the sidenav can now be configured to use fixed positioning. This resolves a longstanding issue where sidenav-container would always introduce a scrolling region.
-* `mat-select` is now used inside `mat-form-field`. This makes all of the existing form-field features available with `mat-select`, including hints, errors, prefixes, and suffixes. This also ensures that `mat-select` and `matInput` have a consistent presentation.
+* `mat-select` is now used inside `mat-form-field`. This makes all the existing form-field features available with `mat-select`, including hints, errors, prefixes, and suffixes. This also ensures that `mat-select` and `matInput` have a consistent presentation.
 
 ```html
 <mat-form-field>

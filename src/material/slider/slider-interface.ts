@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {InjectionToken} from '@angular/core';
+import {InjectionToken, ChangeDetectorRef} from '@angular/core';
 import {MatRipple, RippleGlobalOptions} from '@angular/material/core';
 
 /**
@@ -82,6 +82,9 @@ export class MatSliderChange {
 }
 
 export interface _MatSlider {
+  /** Whether the given pointer event occurred within the bounds of the slider pointer's DOM Rect. */
+  _isCursorOnSliderThumb(event: PointerEvent, rect: DOMRect): boolean;
+
   /** Gets the slider thumb input of the given thumb position. */
   _getInput(thumbPosition: _MatThumb): _MatSliderThumb | _MatSliderRangeThumb | undefined;
 
@@ -153,6 +156,8 @@ export interface _MatSlider {
 
   /** Used to set the transition duration for thumb and track animations. */
   _setTransition: (withAnimation: boolean) => void;
+
+  _cdr: ChangeDetectorRef;
 }
 
 export interface _MatSliderThumb {

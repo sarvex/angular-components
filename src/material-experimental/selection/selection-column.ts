@@ -6,12 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {
-  MatLegacyCellDef,
-  MatLegacyColumnDef,
-  MatLegacyHeaderCellDef,
-  MatLegacyTable,
-} from '@angular/material/legacy-table';
+import {MatCellDef, MatColumnDef, MatHeaderCellDef, MatTable} from '@angular/material/table';
 import {
   Component,
   Input,
@@ -37,10 +32,12 @@ import {MatSelection} from './selection';
   template: `
     <ng-container matColumnDef>
       <th mat-header-cell *matHeaderCellDef class="mat-selection-column-header">
-        <mat-checkbox *ngIf="selection.multiple"
-            matSelectAll
-            #allToggler="matSelectAll"
-            [indeterminate]="allToggler.indeterminate | async"></mat-checkbox>
+        @if (selection.multiple) {
+          <mat-checkbox
+              matSelectAll
+              #allToggler="matSelectAll"
+              [indeterminate]="allToggler.indeterminate | async"></mat-checkbox>
+        }
       </th>
       <td mat-cell *matCellDef="let row; let i = $index" class="mat-selection-column-cell">
         <mat-checkbox
@@ -67,13 +64,13 @@ export class MatSelectionColumn<T> implements OnInit, OnDestroy {
   }
   private _name: string;
 
-  @ViewChild(MatLegacyColumnDef, {static: true}) private readonly _columnDef: MatLegacyColumnDef;
-  @ViewChild(MatLegacyCellDef, {static: true}) private readonly _cell: MatLegacyCellDef;
-  @ViewChild(MatLegacyHeaderCellDef, {static: true})
-  private readonly _headerCell: MatLegacyHeaderCellDef;
+  @ViewChild(MatColumnDef, {static: true}) private readonly _columnDef: MatColumnDef;
+  @ViewChild(MatCellDef, {static: true}) private readonly _cell: MatCellDef;
+  @ViewChild(MatHeaderCellDef, {static: true})
+  private readonly _headerCell: MatHeaderCellDef;
 
   constructor(
-    @Optional() @Inject(MatLegacyTable) private _table: MatLegacyTable<T>,
+    @Optional() @Inject(MatTable) private _table: MatTable<T>,
     @Optional() @Inject(MatSelection) readonly selection: MatSelection<T>,
   ) {}
 

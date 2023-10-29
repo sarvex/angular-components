@@ -28,16 +28,13 @@ import {
   SimpleChanges,
   ChangeDetectorRef,
   Self,
+  InjectionToken,
+  booleanAttribute,
 } from '@angular/core';
-import {
-  coerceBooleanProperty,
-  coerceNumberProperty,
-  coerceElement,
-  BooleanInput,
-} from '@angular/cdk/coercion';
+import {coerceElement, coerceNumberProperty} from '@angular/cdk/coercion';
 import {Observable, Observer, Subject, merge} from 'rxjs';
 import {startWith, take, map, takeUntil, switchMap, tap} from 'rxjs/operators';
-import {
+import type {
   CdkDragDrop,
   CdkDragEnd,
   CdkDragEnter,
@@ -51,12 +48,19 @@ import {CDK_DRAG_PLACEHOLDER, CdkDragPlaceholder} from './drag-placeholder';
 import {CDK_DRAG_PREVIEW, CdkDragPreview} from './drag-preview';
 import {CDK_DRAG_PARENT} from '../drag-parent';
 import {DragRef, Point, PreviewContainer} from '../drag-ref';
-import {CDK_DROP_LIST, CdkDropListInternal as CdkDropList} from './drop-list';
+import type {CdkDropList} from './drop-list';
 import {DragDrop} from '../drag-drop';
 import {CDK_DRAG_CONFIG, DragDropConfig, DragStartDelay, DragAxis} from './config';
 import {assertElementNode} from './assertions';
 
 const DRAG_HOST_CLASS = 'cdk-drag';
+
+/**
+ * Injection token that can be used to reference instances of `CdkDropList`. It serves as
+ * alternative token to the actual `CdkDropList` class which could cause unnecessary
+ * retention of the class and its directive metadata.
+ */
+export const CDK_DROP_LIST = new InjectionToken<CdkDropList>('CdkDropList');
 
 /** Element that can be moved inside a CdkDropList container. */
 @Directive({
@@ -120,12 +124,12 @@ export class CdkDrag<T = any> implements AfterViewInit, OnChanges, OnDestroy {
   @Input('cdkDragFreeDragPosition') freeDragPosition: Point;
 
   /** Whether starting to drag this element is disabled. */
-  @Input('cdkDragDisabled')
+  @Input({alias: 'cdkDragDisabled', transform: booleanAttribute})
   get disabled(): boolean {
     return this._disabled || (this.dropContainer && this.dropContainer.disabled);
   }
-  set disabled(value: BooleanInput) {
-    this._disabled = coerceBooleanProperty(value);
+  set disabled(value: boolean) {
+    this._disabled = value;
     this._dragRef.disabled = this._disabled;
   }
   private _disabled: boolean;

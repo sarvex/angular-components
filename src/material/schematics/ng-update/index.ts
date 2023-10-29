@@ -14,13 +14,14 @@ import {
 } from '@angular/cdk/schematics';
 
 import {materialUpgradeData} from './upgrade-data';
+import {ThemeBaseMigration} from './migrations/theme-base-v17';
 
-const materialMigrations: NullableDevkitMigration[] = [];
+const materialMigrations: NullableDevkitMigration[] = [ThemeBaseMigration];
 
-/** Entry point for the migration schematics with target of Angular Material v16 */
-export function updateToV16(): Rule {
+/** Entry point for the migration schematics with target of Angular Material v17 */
+export function updateToV17(): Rule {
   return createMigrationSchematicRule(
-    TargetVersion.V16,
+    TargetVersion.V17,
     materialMigrations,
     materialUpgradeData,
     onMigrationComplete,

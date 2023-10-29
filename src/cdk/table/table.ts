@@ -7,7 +7,6 @@
  */
 
 import {Direction, Directionality} from '@angular/cdk/bidi';
-import {BooleanInput, coerceBooleanProperty} from '@angular/cdk/coercion';
 import {
   CollectionViewer,
   DataSource,
@@ -52,6 +51,7 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import {
   BehaviorSubject,
@@ -110,7 +110,10 @@ export type CdkTableDataSourceInput<T> = readonly T[] | DataSource<T> | Observab
  */
 @Directive({selector: '[rowOutlet]'})
 export class DataRowOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(
+    public viewContainer: ViewContainerRef,
+    public elementRef: ElementRef,
+  ) {}
 }
 
 /**
@@ -119,7 +122,10 @@ export class DataRowOutlet implements RowOutlet {
  */
 @Directive({selector: '[headerRowOutlet]'})
 export class HeaderRowOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(
+    public viewContainer: ViewContainerRef,
+    public elementRef: ElementRef,
+  ) {}
 }
 
 /**
@@ -128,7 +134,10 @@ export class HeaderRowOutlet implements RowOutlet {
  */
 @Directive({selector: '[footerRowOutlet]'})
 export class FooterRowOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(
+    public viewContainer: ViewContainerRef,
+    public elementRef: ElementRef,
+  ) {}
 }
 
 /**
@@ -138,7 +147,10 @@ export class FooterRowOutlet implements RowOutlet {
  */
 @Directive({selector: '[noDataRowOutlet]'})
 export class NoDataRowOutlet implements RowOutlet {
-  constructor(public viewContainer: ViewContainerRef, public elementRef: ElementRef) {}
+  constructor(
+    public viewContainer: ViewContainerRef,
+    public elementRef: ElementRef,
+  ) {}
 }
 
 /**
@@ -205,7 +217,7 @@ export interface RenderRow<T> {
   host: {
     'class': 'cdk-table',
     '[class.cdk-table-fixed-layout]': 'fixedLayout',
-    'ngSkipHydration': 'true',
+    'ngSkipHydration': '',
   },
   encapsulation: ViewEncapsulation.None,
   // The "OnPush" status for the `MatTable` component is effectively a noop, so we are removing it.
@@ -420,12 +432,12 @@ export class CdkTable<T> implements AfterContentChecked, CollectionViewer, OnDes
    * dataobject will render the first row that evaluates its when predicate to true, in the order
    * defined in the table, or otherwise the default row which does not have a when predicate.
    */
-  @Input()
+  @Input({transform: booleanAttribute})
   get multiTemplateDataRows(): boolean {
     return this._multiTemplateDataRows;
   }
-  set multiTemplateDataRows(v: BooleanInput) {
-    this._multiTemplateDataRows = coerceBooleanProperty(v);
+  set multiTemplateDataRows(value: boolean) {
+    this._multiTemplateDataRows = value;
 
     // In Ivy if this value is set via a static attribute (e.g. <table multiTemplateDataRows>),
     // this setter will be invoked before the row outlet has been defined hence the null check.
@@ -440,12 +452,12 @@ export class CdkTable<T> implements AfterContentChecked, CollectionViewer, OnDes
    * Whether to use a fixed table layout. Enabling this option will enforce consistent column widths
    * and optimize rendering sticky styles for native tables. No-op for flex tables.
    */
-  @Input()
+  @Input({transform: booleanAttribute})
   get fixedLayout(): boolean {
     return this._fixedLayout;
   }
-  set fixedLayout(v: BooleanInput) {
-    this._fixedLayout = coerceBooleanProperty(v);
+  set fixedLayout(value: boolean) {
+    this._fixedLayout = value;
 
     // Toggling `fixedLayout` may change column widths. Sticky column styles should be recalculated.
     this._forceRecalculateCellWidths = true;
@@ -1337,6 +1349,8 @@ export class CdkTable<T> implements AfterContentChecked, CollectionViewer, OnDes
     }
 
     this._isShowingNoDataRow = shouldShow;
+
+    this._changeDetectorRef.markForCheck();
   }
 }
 

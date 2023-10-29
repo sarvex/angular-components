@@ -17,16 +17,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {ANIMATION_MODULE_TYPE} from '@angular/platform-browser/animations';
-
-import {
-  MAT_ANCHOR_HOST,
-  MAT_ANCHOR_INPUTS,
-  MAT_BUTTON_HOST,
-  MAT_BUTTON_INPUTS,
-  MatAnchorBase,
-  MatButtonBase,
-} from './button-base';
-import {MatRipple} from '@angular/material/core';
+import {MAT_ANCHOR_HOST, MAT_BUTTON_HOST, MatAnchorBase, MatButtonBase} from './button-base';
 
 /**
  * Material Design icon button component. This type of button displays a single interactive icon for
@@ -37,26 +28,12 @@ import {MatRipple} from '@angular/material/core';
   selector: `button[mat-icon-button]`,
   templateUrl: 'icon-button.html',
   styleUrls: ['icon-button.css', 'button-high-contrast.css'],
-  inputs: MAT_BUTTON_INPUTS,
   host: MAT_BUTTON_HOST,
   exportAs: 'matButton',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MatIconButton extends MatButtonBase {
-  /**
-   * Reference to the MatRipple instance of the button.
-   * @deprecated Considered an implementation detail. To be removed.
-   * @breaking-change 17.0.0
-   */
-  override get ripple(): MatRipple {
-    if (!this._ripple && this._rippleLoader) {
-      this._ripple = this._rippleLoader._createMatRipple(this._elementRef.nativeElement);
-      this._ripple!.centered = true;
-    }
-    return this._ripple!;
-  }
-
   constructor(
     elementRef: ElementRef,
     platform: Platform,
@@ -64,6 +41,8 @@ export class MatIconButton extends MatButtonBase {
     @Optional() @Inject(ANIMATION_MODULE_TYPE) animationMode?: string,
   ) {
     super(elementRef, platform, ngZone, animationMode);
+
+    this._rippleLoader.configureRipple(this._elementRef.nativeElement, {centered: true});
   }
 }
 
@@ -76,7 +55,6 @@ export class MatIconButton extends MatButtonBase {
   selector: `a[mat-icon-button]`,
   templateUrl: 'button.html',
   styleUrls: ['icon-button.css', 'button-high-contrast.css'],
-  inputs: MAT_ANCHOR_INPUTS,
   host: MAT_ANCHOR_HOST,
   exportAs: 'matButton, matAnchor',
   encapsulation: ViewEncapsulation.None,

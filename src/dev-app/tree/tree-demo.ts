@@ -8,8 +8,14 @@
 import {Component} from '@angular/core';
 import {CdkTreeModule} from '@angular/cdk/tree';
 import {CommonModule} from '@angular/common';
-import {CdkTreeExamplesModule} from '@angular/components-examples/cdk/tree';
-import {TreeExamplesModule} from '@angular/components-examples/material/tree';
+import {CdkTreeFlatExample, CdkTreeNestedExample} from '@angular/components-examples/cdk/tree';
+import {
+  TreeDynamicExample,
+  TreeFlatOverviewExample,
+  TreeHarnessExample,
+  TreeLoadmoreExample,
+  TreeNestedOverviewExample,
+} from '@angular/components-examples/material/tree';
 import {FormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -27,10 +33,15 @@ import {MatTreeModule} from '@angular/material/tree';
   standalone: true,
   imports: [
     CdkTreeModule,
-    CdkTreeExamplesModule,
+    CdkTreeFlatExample,
+    CdkTreeNestedExample,
     CommonModule,
     FormsModule,
-    TreeExamplesModule,
+    TreeDynamicExample,
+    TreeFlatOverviewExample,
+    TreeHarnessExample,
+    TreeLoadmoreExample,
+    TreeNestedOverviewExample,
     MatButtonModule,
     MatExpansionModule,
     MatCheckboxModule,

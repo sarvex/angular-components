@@ -22,6 +22,7 @@ import {
   ContentChild,
   ContentChildren,
   ElementRef,
+  inject,
   Inject,
   Input,
   NgZone,
@@ -41,7 +42,6 @@ import {
 } from '@angular/material/core';
 import {ANIMATION_MODULE_TYPE} from '@angular/platform-browser/animations';
 import {Subscription} from 'rxjs';
-import {take} from 'rxjs/operators';
 import {
   _MatThumb,
   _MatTickMark,
@@ -284,7 +284,7 @@ export class MatSlider
       this._updateStep(step);
     }
   }
-  private _step: number = 0;
+  private _step: number = 1;
 
   private _updateStep(step: number): void {
     this._step = step;
@@ -405,10 +405,11 @@ export class MatSlider
 
   private _resizeTimer: null | ReturnType<typeof setTimeout> = null;
 
+  private _platform = inject(Platform);
+
   constructor(
     readonly _ngZone: NgZone,
     readonly _cdr: ChangeDetectorRef,
-    readonly _platform: Platform,
     elementRef: ElementRef<HTMLElement>,
     @Optional() readonly _dir: Directionality,
     @Optional()
@@ -585,22 +586,11 @@ export class MatSlider
     transformOrigin: string;
   }): void {
     const trackStyle = this._trackActive.nativeElement.style;
-    const animationOriginChanged =
-      styles.left !== trackStyle.left && styles.right !== trackStyle.right;
 
     trackStyle.left = styles.left;
     trackStyle.right = styles.right;
     trackStyle.transformOrigin = styles.transformOrigin;
-
-    if (animationOriginChanged) {
-      this._elementRef.nativeElement.classList.add('mat-mdc-slider-disable-track-animation');
-      this._ngZone.onStable.pipe(take(1)).subscribe(() => {
-        this._elementRef.nativeElement.classList.remove('mat-mdc-slider-disable-track-animation');
-        trackStyle.transform = styles.transform;
-      });
-    } else {
-      trackStyle.transform = styles.transform;
-    }
+    trackStyle.transform = styles.transform;
   }
 
   /** Returns the translateX positioning for a tick mark based on it's index. */
@@ -913,6 +903,7 @@ export class MatSlider
   private _updateTickMarkUIRange(step: number): void {
     const endValue = this._getValue();
     const startValue = this._getValue(_MatThumb.START);
+
     const numInactiveBeforeStartThumb = Math.max(Math.floor((startValue - this.min) / step), 0);
     const numActive = Math.max(Math.floor((endValue - startValue) / step) + 1, 0);
     const numInactiveAfterEndThumb = Math.max(Math.floor((this.max - endValue) / step), 0);
@@ -941,11 +932,21 @@ export class MatSlider
   }
 
   _setTransition(withAnimation: boolean): void {
-    this._hasAnimation = withAnimation && !this._noopAnimations;
+    this._hasAnimation = !this._platform.IOS && withAnimation && !this._noopAnimations;
     this._elementRef.nativeElement.classList.toggle(
       'mat-mdc-slider-with-animation',
       this._hasAnimation,
     );
+  }
+
+  /** Whether the given pointer event occurred within the bounds of the slider pointer's DOM Rect. */
+  _isCursorOnSliderThumb(event: PointerEvent, rect: DOMRect) {
+    const radius = rect.width / 2;
+    const centerX = rect.x + radius;
+    const centerY = rect.y + radius;
+    const dx = event.clientX - centerX;
+    const dy = event.clientY - centerY;
+    return Math.pow(dx, 2) + Math.pow(dy, 2) < Math.pow(radius, 2);
   }
 }
 

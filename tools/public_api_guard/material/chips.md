@@ -26,11 +26,11 @@ import { FormGroupDirective } from '@angular/forms';
 import { HasTabIndex } from '@angular/material/core';
 import * as i0 from '@angular/core';
 import * as i11 from '@angular/material/core';
-import * as i12 from '@angular/common';
 import { InjectionToken } from '@angular/core';
 import { MatFormField } from '@angular/material/form-field';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { MatRipple } from '@angular/material/core';
+import { MatRippleLoader } from '@angular/material/core';
 import { NgControl } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { NgZone } from '@angular/core';
@@ -61,7 +61,7 @@ export const MAT_CHIP_TRAILING_ICON: InjectionToken<unknown>;
 export const MAT_CHIPS_DEFAULT_OPTIONS: InjectionToken<MatChipsDefaultOptions>;
 
 // @public
-export class MatChip extends _MatChipMixinBase implements OnInit, AfterViewInit, AfterContentInit, CanColor, CanDisableRipple, CanDisable, HasTabIndex, OnDestroy {
+export class MatChip extends _MatChipMixinBase implements OnInit, AfterViewInit, AfterContentInit, CanColor, CanDisableRipple, CanDisable, DoCheck, HasTabIndex, OnDestroy {
     constructor(_changeDetectorRef: ChangeDetectorRef, elementRef: ElementRef<HTMLElement>, _ngZone: NgZone, _focusMonitor: FocusMonitor, _document: any, animationMode?: string, _globalRippleOptions?: RippleGlobalOptions | undefined, tabIndex?: string);
     protected _allLeadingIcons: QueryList<MatChipAvatar>;
     protected _allRemoveIcons: QueryList<MatChipRemove>;
@@ -90,13 +90,14 @@ export class MatChip extends _MatChipMixinBase implements OnInit, AfterViewInit,
     protected _highlighted: boolean;
     id: string;
     _isBasicChip: boolean;
-    readonly _isRippleCentered = false;
     _isRippleDisabled(): boolean;
     leadingIcon: MatChipAvatar;
     // (undocumented)
     ngAfterContentInit(): void;
     // (undocumented)
     ngAfterViewInit(): void;
+    // (undocumented)
+    ngDoCheck(): void;
     // (undocumented)
     ngOnDestroy(): void;
     // (undocumented)
@@ -114,7 +115,9 @@ export class MatChip extends _MatChipMixinBase implements OnInit, AfterViewInit,
     readonly removed: EventEmitter<MatChipEvent>;
     removeIcon: MatChipRemove;
     // @deprecated
-    ripple: MatRipple;
+    get ripple(): MatRipple;
+    set ripple(v: MatRipple);
+    _rippleLoader: MatRippleLoader;
     role: string | null;
     trailingIcon: MatChipTrailingIcon;
     get value(): any;
@@ -240,9 +243,8 @@ export class MatChipInput implements MatChipTextControl, AfterContentInit, OnCha
     _addOnBlur: boolean;
     _blur(): void;
     readonly chipEnd: EventEmitter<MatChipInputEvent>;
+    get chipGrid(): MatChipGrid;
     set chipGrid(value: MatChipGrid);
-    // (undocumented)
-    _chipGrid: MatChipGrid;
     clear(): void;
     get disabled(): boolean;
     set disabled(value: BooleanInput);
@@ -407,7 +409,9 @@ export class MatChipRow extends MatChip implements AfterViewInit {
     // (undocumented)
     _isEditing: boolean;
     // (undocumented)
-    static ɵcmp: i0.ɵɵComponentDeclaration<MatChipRow, "mat-chip-row, [mat-chip-row], mat-basic-chip-row, [mat-basic-chip-row]", never, { "color": { "alias": "color"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "disableRipple": { "alias": "disableRipple"; "required": false; }; "tabIndex": { "alias": "tabIndex"; "required": false; }; "editable": { "alias": "editable"; "required": false; }; }, { "edited": "edited"; }, ["contentEditInput"], ["mat-chip-avatar, [matChipAvatar]", "*", "[matChipEditInput]", "mat-chip-trailing-icon,[matChipRemove],[matChipTrailingIcon]"], false, never>;
+    _isRippleDisabled(): boolean;
+    // (undocumented)
+    static ɵcmp: i0.ɵɵComponentDeclaration<MatChipRow, "mat-chip-row, [mat-chip-row], mat-basic-chip-row, [mat-basic-chip-row]", never, { "color": { "alias": "color"; "required": false; }; "disabled": { "alias": "disabled"; "required": false; }; "disableRipple": { "alias": "disableRipple"; "required": false; }; "tabIndex": { "alias": "tabIndex"; "required": false; }; "editable": { "alias": "editable"; "required": false; }; }, { "edited": "edited"; }, ["contentEditInput"], ["mat-chip-avatar, [matChipAvatar]", "[matChipEditInput]", "*", "mat-chip-trailing-icon,[matChipRemove],[matChipTrailingIcon]"], false, never>;
     // (undocumented)
     static ɵfac: i0.ɵɵFactoryDeclaration<MatChipRow, [null, null, null, null, null, { optional: true; }, { optional: true; }, { attribute: "tabindex"; }]>;
 }
@@ -438,6 +442,7 @@ export class MatChipSet extends _MatChipSetMixinBase implements AfterViewInit, H
     _chipActions: QueryList<MatChipAction>;
     get chipDestroyedChanges(): Observable<MatChipEvent>;
     get chipFocusChanges(): Observable<MatChipEvent>;
+    get chipRemovedChanges(): Observable<MatChipEvent>;
     _chips: QueryList<MatChip>;
     protected _defaultRole: string;
     protected _destroyed: Subject<void>;
@@ -477,7 +482,7 @@ export class MatChipsModule {
     // (undocumented)
     static ɵinj: i0.ɵɵInjectorDeclaration<MatChipsModule>;
     // (undocumented)
-    static ɵmod: i0.ɵɵNgModuleDeclaration<MatChipsModule, [typeof i1.MatChipAction, typeof i2.MatChip, typeof i3.MatChipAvatar, typeof i4.MatChipEditInput, typeof i5.MatChipGrid, typeof i6.MatChipInput, typeof i7.MatChipListbox, typeof i8.MatChipOption, typeof i3.MatChipRemove, typeof i9.MatChipRow, typeof i10.MatChipSet, typeof i3.MatChipTrailingIcon], [typeof i11.MatCommonModule, typeof i12.CommonModule, typeof i11.MatRippleModule], [typeof i11.MatCommonModule, typeof i2.MatChip, typeof i3.MatChipAvatar, typeof i4.MatChipEditInput, typeof i5.MatChipGrid, typeof i6.MatChipInput, typeof i7.MatChipListbox, typeof i8.MatChipOption, typeof i3.MatChipRemove, typeof i9.MatChipRow, typeof i10.MatChipSet, typeof i3.MatChipTrailingIcon]>;
+    static ɵmod: i0.ɵɵNgModuleDeclaration<MatChipsModule, [typeof i1.MatChipAction, typeof i2.MatChip, typeof i3.MatChipAvatar, typeof i4.MatChipEditInput, typeof i5.MatChipGrid, typeof i6.MatChipInput, typeof i7.MatChipListbox, typeof i8.MatChipOption, typeof i3.MatChipRemove, typeof i9.MatChipRow, typeof i10.MatChipSet, typeof i3.MatChipTrailingIcon], [typeof i11.MatCommonModule, typeof i11.MatRippleModule], [typeof i11.MatCommonModule, typeof i2.MatChip, typeof i3.MatChipAvatar, typeof i4.MatChipEditInput, typeof i5.MatChipGrid, typeof i6.MatChipInput, typeof i7.MatChipListbox, typeof i8.MatChipOption, typeof i3.MatChipRemove, typeof i9.MatChipRow, typeof i10.MatChipSet, typeof i3.MatChipTrailingIcon]>;
 }
 
 // @public

@@ -6,13 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {
-  BooleanInput,
-  coerceArray,
-  coerceNumberProperty,
-  coerceBooleanProperty,
-  NumberInput,
-} from '@angular/cdk/coercion';
+import {NumberInput, coerceArray, coerceNumberProperty} from '@angular/cdk/coercion';
 import {
   ElementRef,
   EventEmitter,
@@ -24,11 +18,11 @@ import {
   ChangeDetectorRef,
   SkipSelf,
   Inject,
-  InjectionToken,
+  booleanAttribute,
 } from '@angular/core';
 import {Directionality} from '@angular/cdk/bidi';
 import {ScrollDispatcher} from '@angular/cdk/scrolling';
-import {CdkDrag} from './drag';
+import {CDK_DROP_LIST, CdkDrag} from './drag';
 import {CdkDragDrop, CdkDragEnter, CdkDragExit, CdkDragSortEvent} from '../drag-events';
 import {CDK_DROP_LIST_GROUP, CdkDropListGroup} from './drop-list-group';
 import {DropListRef} from '../drop-list-ref';
@@ -41,20 +35,6 @@ import {assertElementNode} from './assertions';
 
 /** Counter used to generate unique ids for drop zones. */
 let _uniqueIdCounter = 0;
-
-/**
- * Internal compile-time-only representation of a `CdkDropList`.
- * Used to avoid circular import issues between the `CdkDropList` and the `CdkDrag`.
- * @docs-private
- */
-export interface CdkDropListInternal extends CdkDropList {}
-
-/**
- * Injection token that can be used to reference instances of `CdkDropList`. It serves as
- * alternative token to the actual `CdkDropList` class which could cause unnecessary
- * retention of the class and its directive metadata.
- */
-export const CDK_DROP_LIST = new InjectionToken<CdkDropList>('CdkDropList');
 
 /** Container that wraps a set of draggable items. */
 @Directive({
@@ -111,22 +91,22 @@ export class CdkDropList<T = any> implements OnDestroy {
   @Input('cdkDropListLockAxis') lockAxis: DragAxis;
 
   /** Whether starting a dragging sequence from this container is disabled. */
-  @Input('cdkDropListDisabled')
+  @Input({alias: 'cdkDropListDisabled', transform: booleanAttribute})
   get disabled(): boolean {
     return this._disabled || (!!this._group && this._group.disabled);
   }
-  set disabled(value: BooleanInput) {
+  set disabled(value: boolean) {
     // Usually we sync the directive and ref state right before dragging starts, in order to have
     // a single point of failure and to avoid having to use setters for everything. `disabled` is
     // a special case, because it can prevent the `beforeStarted` event from firing, which can lock
     // the user in a disabled state, so we also need to sync it as it's being set.
-    this._dropListRef.disabled = this._disabled = coerceBooleanProperty(value);
+    this._dropListRef.disabled = this._disabled = value;
   }
   private _disabled: boolean;
 
   /** Whether sorting within this drop list is disabled. */
-  @Input('cdkDropListSortingDisabled')
-  sortingDisabled: BooleanInput;
+  @Input({alias: 'cdkDropListSortingDisabled', transform: booleanAttribute})
+  sortingDisabled: boolean;
 
   /**
    * Function that is used to determine whether an item
@@ -140,8 +120,8 @@ export class CdkDropList<T = any> implements OnDestroy {
   sortPredicate: (index: number, drag: CdkDrag, drop: CdkDropList) => boolean = () => true;
 
   /** Whether to auto-scroll the view when the user moves their pointer close to the edges. */
-  @Input('cdkDropListAutoScrollDisabled')
-  autoScrollDisabled: BooleanInput;
+  @Input({alias: 'cdkDropListAutoScrollDisabled', transform: booleanAttribute})
+  autoScrollDisabled: boolean;
 
   /** Number of pixels to scroll for each frame when auto-scrolling an element. */
   @Input('cdkDropListAutoScrollStep')
@@ -317,8 +297,8 @@ export class CdkDropList<T = any> implements OnDestroy {
 
       ref.disabled = this.disabled;
       ref.lockAxis = this.lockAxis;
-      ref.sortingDisabled = coerceBooleanProperty(this.sortingDisabled);
-      ref.autoScrollDisabled = coerceBooleanProperty(this.autoScrollDisabled);
+      ref.sortingDisabled = this.sortingDisabled;
+      ref.autoScrollDisabled = this.autoScrollDisabled;
       ref.autoScrollStep = coerceNumberProperty(this.autoScrollStep, 2);
       ref
         .connectedTo(siblings.filter(drop => drop && drop !== this).map(list => list._dropListRef))

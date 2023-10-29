@@ -44,11 +44,6 @@ describe('MenuItem', () => {
       expect(nativeButton.getAttribute('type')).toBe('button');
     });
 
-    it('should coerce the disabled property', () => {
-      menuItem.disabled = '';
-      expect(menuItem.disabled).toBeTrue();
-    });
-
     it('should toggle the aria disabled attribute', () => {
       expect(nativeButton.hasAttribute('aria-disabled')).toBeFalse();
 
@@ -176,7 +171,7 @@ class MenuItemWithIconClass {
 }
 
 @Component({
-  template: ` <button cdkMenuItem><b>Click</b> me!</button> `,
+  template: ` <button cdkMenuItem><strong>Click</strong> me!</button> `,
 })
 class MenuItemWithBoldElement {}
 
@@ -189,7 +184,7 @@ class MenuItemWithBoldElement {}
           Click
         </div>
         <mat-icon>menu</mat-icon>
-        <div>me<b>!</b></div>
+        <div>me<strong>!</strong></div>
       </div>
     </button>
   `,

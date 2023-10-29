@@ -14,10 +14,10 @@ import {
   _getEventTarget,
   _getShadowRoot,
 } from '@angular/cdk/platform';
-import {coerceBooleanProperty, coerceElement} from '@angular/cdk/coercion';
+import {coerceElement} from '@angular/cdk/coercion';
 import {isFakeMousedownFromScreenReader, isFakeTouchstartFromScreenReader} from '@angular/cdk/a11y';
 import {Subscription, Subject, Observable} from 'rxjs';
-import {DropListRefInternal as DropListRef} from './drop-list-ref';
+import type {DropListRef} from './drop-list-ref';
 import {DragDropRegistry} from './drag-drop-registry';
 import {
   combineTransforms,
@@ -68,13 +68,6 @@ const MOUSE_EVENT_IGNORE_TIME = 800;
 
 // TODO(crisbeto): add an API for moving a draggable up/down the
 // list programmatically. Useful for keyboard controls.
-
-/**
- * Internal compile-time-only representation of a `DragRef`.
- * Used to avoid circular import issues between the `DragRef` and the `DropListRef`.
- * @docs-private
- */
-export interface DragRefInternal extends DragRef {}
 
 /** Template that can be used to create a drag helper element (e.g. a preview or a placeholder). */
 interface DragHelperTemplate<T = any> {
@@ -294,12 +287,10 @@ export class DragRef<T = any> {
     return this._disabled || !!(this._dropContainer && this._dropContainer.disabled);
   }
   set disabled(value: boolean) {
-    const newValue = coerceBooleanProperty(value);
-
-    if (newValue !== this._disabled) {
-      this._disabled = newValue;
+    if (value !== this._disabled) {
+      this._disabled = value;
       this._toggleNativeDragInteractions();
-      this._handles.forEach(handle => toggleNativeDragInteractions(handle, newValue));
+      this._handles.forEach(handle => toggleNativeDragInteractions(handle, value));
     }
   }
   private _disabled = false;
@@ -1245,13 +1236,22 @@ export class DragRef<T = any> {
       : point;
 
     if (this.lockAxis === 'x' || dropContainerLock === 'x') {
-      y = this._pickupPositionOnPage.y;
+      y =
+        this._pickupPositionOnPage.y -
+        (this.constrainPosition ? this._pickupPositionInElement.y : 0);
     } else if (this.lockAxis === 'y' || dropContainerLock === 'y') {
-      x = this._pickupPositionOnPage.x;
+      x =
+        this._pickupPositionOnPage.x -
+        (this.constrainPosition ? this._pickupPositionInElement.x : 0);
     }
 
     if (this._boundaryRect) {
-      const {x: pickupX, y: pickupY} = this._pickupPositionInElement;
+      // If not using a custom constrain we need to account for the pickup position in the element
+      // otherwise we do not need to do this, as it has already been accounted for
+      const {x: pickupX, y: pickupY} = !this.constrainPosition
+        ? this._pickupPositionInElement
+        : {x: 0, y: 0};
+
       const boundaryRect = this._boundaryRect;
       const {width: previewWidth, height: previewHeight} = this._getPreviewRect();
       const minY = boundaryRect.top + pickupY;
