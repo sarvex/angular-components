@@ -22,7 +22,7 @@ jobs:
       (github.event.action == 'labeled' && github.event.label.name == 'dev-app preview') ||
       (github.event.action == 'synchronize' && contains(github.event.pull_request.labels.*.name, 'dev-app preview'))
     steps:
-      - uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # renovate: tag=v2.0.0
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # renovate: tag=v2.0.0
       - uses: ./.github/actions/yarn-install
 
       - uses: angular/dev-infra/github-actions/setup-bazel-remote-exec@fb30926790c6225d553b91a4818cab2fdde4fb4e
