@@ -200,18 +200,11 @@ __metadata:
 
 "@angular/cdk@file:../../dist/releases/cdk::locator=yarn-pnp-compat%40workspace%3A.":
   version: 16.1.0-next.0+sha-3b2ebcb-with-local-changes
-  resolution: "@angular/cdk@file:../../dist/releases/cdk#../../dist/releases/cdk::hash=1851be&locator=yarn-pnp-compat%40workspace%3A."
+  resolution: "@angular/cdk@file:../../dist/releases/cdk#../../dist/releases/cdk::hash=09d2ea&locator=yarn-pnp-compat%40workspace%3A."
   dependencies:
     parse5: ^7.1.2
     tslib: ^2.3.0
-  peerDependencies:
-    "@angular/common": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/core": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    rxjs: ^6.5.3 || ^7.4.0
-  dependenciesMeta:
-    parse5:
-      optional: true
-  checksum: a1a36ff06bd916035dfe8432b69a63ca62e3ea9bb606e4ff0e5be4c10c4df8f1d866355ef08dddd1aacce05e1c89d4af92d6de526e2ebb4e1f4b1aa9ecf07408
+  checksum: 69bf9e176d2b2954bb55b43f9a9cee32742aa9e4b4bcc29ae577604f2406a6c38f392fc4f5f9684aaae4aaaaa935cc7be7d1b138eac3d5c27a2f43cd692c2588
   languageName: node
   linkType: hard
 
@@ -384,7 +377,7 @@ __metadata:
 
 "@angular/material@file:../../dist/releases/material::locator=yarn-pnp-compat%40workspace%3A.":
   version: 16.1.0-next.0+sha-3b2ebcb-with-local-changes
-  resolution: "@angular/material@file:../../dist/releases/material#../../dist/releases/material::hash=44114a&locator=yarn-pnp-compat%40workspace%3A."
+  resolution: "@angular/material@file:../../dist/releases/material#../../dist/releases/material::hash=73f11b&locator=yarn-pnp-compat%40workspace%3A."
   dependencies:
     "@material/animation": 15.0.0-canary.3b5b55e31.0
     "@material/auto-init": 15.0.0-canary.3b5b55e31.0
@@ -434,15 +427,7 @@ __metadata:
     "@material/touch-target": 15.0.0-canary.3b5b55e31.0
     "@material/typography": 15.0.0-canary.3b5b55e31.0
     tslib: ^2.3.0
-  peerDependencies:
-    "@angular/animations": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/cdk": 16.1.0-next.0+sha-3b2ebcb-with-local-changes
-    "@angular/common": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/core": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/forms": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    "@angular/platform-browser": ^16.0.0-0 || ^16.1.0-0 || ^16.2.0-0 || ^16.3.0-0 || ^17.0.0-0
-    rxjs: ^6.5.3 || ^7.4.0
-  checksum: 17fbd07d89774bc9da18d9c751fa065a3803c241e5a539caa4d7602e005aca799dd45e3de8ec8beabb4e53a9b8854dd458087ba4eb9467d1e90953e96e43d16f
+  checksum: 8e6aa6c09fa8c40165c6cd812b91d8c15f8317f7708c9453493f30905c5981d273fb789eba829e576e8291a75e08b0a727effe24e919598f12b0945f6273f9db
   languageName: node
   linkType: hard
 
@@ -7609,9 +7594,9 @@ __metadata:
   linkType: hard
 
 "ip@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "ip@npm:2.0.0"
-  checksum: cfcfac6b873b701996d71ec82a7dd27ba92450afdb421e356f44044ed688df04567344c36cbacea7d01b1c39a4c732dc012570ebe9bebfb06f27314bca625349
+  version: 2.0.1
+  resolution: "ip@npm:2.0.1"
+  checksum: d765c9fd212b8a99023a4cde6a558a054c298d640fec1020567494d257afd78ca77e37126b1a3ef0e053646ced79a816bf50621d38d5e768cdde0431fa3b0d35
   languageName: node
   linkType: hard
 
